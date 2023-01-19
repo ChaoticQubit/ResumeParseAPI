@@ -88,3 +88,4 @@ uvloop==0.17.0
 watchfiles==0.18.1
 wcwidth==0.2.5
 websockets==10.4
+azure-storage-blob

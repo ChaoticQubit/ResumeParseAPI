@@ -1,5 +1,5 @@
 from classes.APIParser import APIParser
-import json
+import json, os
 from config import settings
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
@@ -17,9 +17,9 @@ def __parseAzureParams(filepath):
 def __generateSASTokenForBlob(filepath, filename) -> str:
     try:
         AZURE_ACC_NAME, AZURE_CONTAINER = __parseAzureParams(filepath)
-        AZURE_PRIMARY_KEY = settings.azure_primary_key
+        AZURE_PRIMARY_KEY = os.environ["AZURE_PRIMARY_KEY"]
         AZURE_BLOB = filename
-        AZURE_SAS_EXPIRY = settings.azure_sas_expiry
+        AZURE_SAS_EXPIRY = int(os.environ["AZURE_SAS_EXPIRY"])
 
         sas = generate_blob_sas(
             account_name=AZURE_ACC_NAME,
@@ -37,7 +37,4 @@ def __generateSASTokenForBlob(filepath, filename) -> str:
 
 def __getParsedAffindaData(sas_url) -> dict:
     doc = APIParser(sas_url).getResume()
-    file = open('Tests/output.json', 'w')
-    file.write(json.dumps(doc))
-    file.close()
     return doc

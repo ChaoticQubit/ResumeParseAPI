@@ -1,8 +1,8 @@
 from affinda import AffindaAPI, TokenCredential
 from config import settings
-import json
+import json, os
 
-API_TOKEN = settings.affinda_token
+API_TOKEN = os.environ["AFFINDA_TOKEN"]
 credential = TokenCredential(token = API_TOKEN)
 client = AffindaAPI(credential = credential)
 
