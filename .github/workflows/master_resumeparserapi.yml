@@ -9,6 +9,21 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      GIT_FunctionApp_Name:
+        description: 'ResumeParserAPI'
+        required: true
+        default: 'resumeparserapi'
+        
+      GIT_FunctionApp_URL:
+        description: 'ResumeParserAPI URL'
+        required: true
+        default: 'https://resumeparserapi.azurewebsites.net'
+        
+      GIT_FunctionApp_PATH:
+        description: 'ResumeParserAPI PATH'
+        required: true
+        default: './'
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
